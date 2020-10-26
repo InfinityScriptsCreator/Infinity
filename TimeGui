@@ -1,0 +1,74 @@
+for i,v in pairs(game.CoreGui:GetChildren()) do
+	if v.Name == "TimeGui" then
+		return v
+	end
+end
+
+local TimeGui = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local CoolLine1 = Instance.new("Frame")
+local CoolLine2 = Instance.new("Frame")
+local Time = Instance.new("TextLabel")
+
+
+TimeGui.Name = "TimeGui"
+TimeGui.Parent = game.CoreGui
+TimeGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+main.Name = "main"
+main.Parent = TimeGui
+main.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+main.BorderSizePixel = 0
+main.Position = UDim2.new(0.419667155, 0, -0.0539173819, 0)
+main.Size = UDim2.new(0, 195, 0, 132)
+
+CoolLine1.Name = "CoolLine1"
+CoolLine1.Parent = main
+CoolLine1.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+CoolLine1.BorderSizePixel = 0
+CoolLine1.Position = UDim2.new(-1.47179496, 0, -0.430294901, 0)
+CoolLine1.Rotation = 20.000
+CoolLine1.Size = UDim2.new(0, 322, 0, 138)
+
+CoolLine2.Name = "CoolLine2"
+CoolLine2.Parent = main
+CoolLine2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+CoolLine2.BorderSizePixel = 0
+CoolLine2.Position = UDim2.new(0.820512831, 0, -0.434623957, 0)
+CoolLine2.Rotation = -20.000
+CoolLine2.Size = UDim2.new(0, 322, 0, 138)
+
+Time.Name = "Time"
+Time.Parent = main
+Time.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Time.BackgroundTransparency = 1.000
+Time.Size = UDim2.new(0, 200, 0, 132)
+Time.Font = Enum.Font.DenkOne
+Time.Text = ""
+Time.TextColor3 = Color3.fromRGB(255, 255, 255)
+Time.TextSize = 28.000
+Time.TextWrapped = true
+
+-- Scripts:
+
+local function RKSFEC_fake_script()
+	local script = Instance.new('LocalScript', TimeGui)
+
+	local mainframe = script.Parent.main
+	local timelabel = mainframe.Time
+	
+	while wait() do
+		local minutes = os.date("*t")["min"]
+		local hours = os.date("*t")["hour"]
+		
+		if tonumber(minutes) <= 9 then
+			minutes = "0"..minutes
+		end
+		if tonumber(hours) <= 9 then
+			hours = "0"..hours
+		end
+		
+		timelabel.Text = hours..":"..minutes
+	end
+end
+coroutine.wrap(RKSFEC_fake_script)()
